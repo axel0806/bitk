@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balder IT Konsult UF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep: #0B1220;
+    --navy-panel: #10192C;
+    --off-white: #F6F5F1;
+    --paper: #FBFAF7;
+    --gold: #E4B75C;
+    --gold-soft: #F0CD86;
+    --ice: #86B4D6;
+    --slate: #1C2430;
+    --slate-soft: #4B5567;
+    --line: rgba(28,36,48,0.12);
+    --line-dark: rgba(246,245,241,0.14);
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --maxw: 1120px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--slate);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+  img, svg{ display: block; max-width: 100%; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.12;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  p{ margin: 0; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 0;
+    transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled{
+    background: rgba(11,18,32,0.92);
+    backdrop-filter: blur(10px);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+  .logo-mark{ width: 26px; height: 26px; flex-shrink: 0; }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: var(--off-white);
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .nav-links a:hover{ opacity: 1; }
+  .nav-cta{
+    padding: 9px 20px;
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    color: var(--gold) !important;
+    opacity: 1 !important;
+  }
+  .nav-cta:hover{ background: var(--gold); color: var(--navy-deep) !important; }
+  .nav-toggle{
+    display: none;
+    background: none; border: none;
+    width: 32px; height: 22px;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--off-white);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .nav-toggle span{ top: 10px; }
+  .nav-toggle span::before{ top: -8px; }
+  .nav-toggle span::after{ top: 8px; }
+  .nav-toggle.open span{ background: transparent; }
+  .nav-toggle.open span::before{ transform: translateY(8px) rotate(45deg); }
+  .nav-toggle.open span::after{ transform: translateY(-8px) rotate(-45deg); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: var(--navy-deep);
+    color: var(--off-white);
+    padding: 168px 0 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap{
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-soft);
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before{
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+    max-width: 15ch;
+  }
+  .hero-sub{
+    margin-top: 22px;
+    font-size: 1.1rem;
+    color: rgba(246,245,241,0.72);
+    max-width: 42ch;
+  }
+  .hero-actions{
+    margin-top: 38px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn-primary{ background: var(--gold); color: var(--navy-deep); }
+  .btn-primary:hover{ background: var(--gold-soft); }
+  .btn-ghost{ border-color: var(--line-dark); color: var(--off-white); }
+  .btn-ghost:hover{ border-color: var(--ice); }
+
+  .sunburst-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ray{
+    stroke-dasharray: 90;
+    stroke-dashoffset: 90;
+    animation: draw 1.1s ease forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  .sun-core{
+    opacity: 0;
+    animation: fadeIn 0.6s ease 0.3s forwards;
+  }
+  @keyframes fadeIn{ to{ opacity: 1; } }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 96px 0; }
+  .section-head{
+    max-width: 46ch;
+    margin-bottom: 56px;
+  }
+  .section-label{
+    color: var(--slate-soft);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .section-label.on-dark{ color: var(--gold-soft); }
+  .section-head h2{
+    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+    color: var(--slate);
+  }
+  .section-head p{
+    margin-top: 16px;
+    color: var(--slate-soft);
+    font-size: 1.05rem;
+  }
+
+  /* ---------- OM OSS ---------- */
+  .om-oss{ background: var(--off-white); }
+  .om-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .om-grid .section-head{ margin-bottom: 0; }
+  .om-text p + p{ margin-top: 16px; }
+  .om-text p{ color: var(--slate-soft); font-size: 1.03rem; }
+  .stat-row{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-num{
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navy-deep);
+  }
+  .stat-label{
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: var(--slate-soft);
+  }
+
+  /* ---------- TJÄNSTER ---------- */
+  .tjanster{ background: var(--paper); }
+  .service-row{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .service-row:last-child{ border-bottom: 1px solid var(--line); }
+  .service-title{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .service-icon{ width: 30px; height: 30px; flex-shrink: 0; color: var(--gold); }
+  .service-body p{ color: var(--slate-soft); max-width: 62ch; }
+  .service-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .tag{
+    font-size: 0.82rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(28,36,48,0.06);
+    color: var(--slate-soft);
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process{ background: var(--navy-panel); color: var(--off-white); }
+  .steps{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .step{
+    padding-top: 20px;
+    border-top: 2px solid var(--line-dark);
+  }
+  .step-num{
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .step h3{
+    margin-top: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .step p{
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: rgba(246,245,241,0.68);
+  }
+
+  /* ---------- KONTAKT ---------- */
+  .kontakt{ background: var(--navy-deep); color: var(--off-white); }
+  .kontakt-grid{
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 60px;
+  }
+  .kontakt h2{ font-size: clamp(1.8rem, 3vw, 2.5rem); max-width: 12ch; }
+  .kontakt-sub{ margin-top: 18px; color: rgba(246,245,241,0.7); max-width: 40ch; }
+  .kontakt-info{ margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
+  .kontakt-info a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--off-white);
+    font-weight: 500;
+  }
+  .kontakt-info svg{ width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+
+  form{ display: flex; flex-direction: column; gap: 16px; }
+  .form-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  label{
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(246,245,241,0.6);
+    margin-bottom: 6px;
+  }
+  input, textarea{
+    width: 100%;
+    background: rgba(246,245,241,0.06);
+    border: 1px solid var(--line-dark);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+  input::placeholder, textarea::placeholder{ color: rgba(246,245,241,0.35); }
+  input:focus, textarea:focus{ border-color: var(--gold); outline: none; }
+  textarea{ resize: vertical; min-height: 110px; }
+  .form-msg{
+    font-size: 0.9rem;
+    color: var(--gold-soft);
+    min-height: 1.2em;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background: var(--navy-deep);
+    border-top: 1px solid var(--line-dark);
+    padding: 28px 0;
+  }
+  .footer-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-row, .footer-row a{
+    color: rgba(246,245,241,0.55);
+    font-size: 0.85rem;
+  }
+  .footer-row a{ text-decoration: none; }
+  .footer-row a:hover{ color: var(--gold-soft); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .wrap{ padding: 0 22px; }
+    .nav-links{
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--navy-deep);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px 22px 32px;
+      gap: 20px;
+      border-bottom: 1px solid var(--line-dark);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .nav-links.open{
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .nav-toggle{ display: block; }
+    .hero{ padding: 128px 0 70px; }
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .sunburst-holder{ margin-top: 40px; }
+    .sunburst-holder svg{ width: 190px; }
+    .om-grid, .kontakt-grid{ grid-template-columns: 1fr; gap: 36px; }
+    .stat-row{ grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .service-row{ grid-template-columns: 1fr; gap: 14px; }
+    .steps{ grid-template-columns: 1fr 1fr; }
+    .form-row{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px){
+    .steps{ grid-template-columns: 1fr; }
+    .stat-num{ font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="6" fill="#E4B75C"/>
+          <g stroke="#E4B75C" stroke-width="2" stroke-linecap="round">
+            <line x1="20" y1="2" x2="20" y2="9"/>
+            <line x1="20" y1="31" x2="20" y2="38"/>
+            <line x1="2" y1="20" x2="9" y2="20"/>
+            <line x1="31" y1="20" x2="38" y2="20"/>
+            <line x1="6.9" y1="6.9" x2="11.8" y2="11.8" stroke="#86B4D6"/>
+            <line x1="28.2" y1="28.2" x2="33.1" y2="33.1" stroke="#86B4D6"/>
+            <line x1="6.9" y1="33.1" x2="11.8" y2="28.2" stroke="#86B4D6"/>
+            <line x1="28.2" y1="11.8" x2="33.1" y2="6.9" stroke="#86B4D6"/>
+          </g>
+        </svg>
+        Balder IT Konsult
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#tjanster">Tjänster</a></li>
+        <li><a href="#process">Så jobbar vi</a></li>
+        <li><a href="#kontakt" class="nav-cta">Kontakta oss</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Öppna meny" aria-expanded="false">
+        <span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Balder IT Konsult UF · Skellefteå</div>
+        <h1>Klarhet i det digitala mörkret.</h1>
+        <p class="hero-sub">Vi är ett UF-företag som hjälper lokala verksamheter att förstå och forma sin digitala vardag — från första hemsidan till smartare arbetsflöden.</p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn btn-primary">Boka ett kostnadsfritt samtal</a>
+          <a href="#tjanster" class="btn btn-ghost">Se vad vi gör</a>
+        </div>
+      </div>
+      <div class="sunburst-holder">
+        <svg viewBox="0 0 400 400" width="280" height="280">
+          <g stroke-linecap="round">
+            <line class="ray" x1="200" y1="30" x2="200" y2="100" stroke="#E4B75C" stroke-width="4" style="animation-delay:0.05s"/>
+            <line class="ray" x1="200" y1="300" x2="200" y2="370" stroke="#E4B75C" stroke-width="4" style="animation-delay:0.1s"/>
+            <line class="ray" x1="30" y1="200" x2="100" y2="200" stroke="#86B4D6" stroke-width="4" style="animation-delay:0.15s"/>
+            <line class="ray" x1="300" y1="200" x2="370" y2="200" stroke="#86B4D6" stroke-width="4" style="animation-delay:0.2s"/>
+            <line class="ray" x1="90" y1="90" x2="138" y2="138" stroke="#E4B75C" stroke-width="3.5" style="animation-delay:0.25s"/>
+            <line class="ray" x1="262" y1="262" x2="310" y2="310" stroke="#E4B75C" stroke-width="3.5" style="animation-delay:0.3s"/>
+            <line class="ray" x1="90" y1="310" x2="138" y2="262" stroke="#86B4D6" stroke-width="3.5" style="animation-delay:0.35s"/>
+            <line class="ray" x1="262" y1="138" x2="310" y2="90" stroke="#86B4D6" stroke-width="3.5" style="animation-delay:0.4s"/>
+            <line class="ray" x1="200" y1="60" x2="200" y2="60" stroke="none"/>
+          </g>
+          <circle class="sun-core" cx="200" cy="200" r="46" fill="#E4B75C"/>
+          <circle class="sun-core" cx="200" cy="200" r="46" fill="none" stroke="#0B1220" stroke-width="2" opacity="0.15"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="om-oss" id="om-oss">
+    <div class="wrap om-grid">
+      <div class="section-head">
+        <div class="section-label">Om oss</div>
+        <h2>Uppkallade efter ljusets gud, byggda av teknikintresserade gymnasieelever.</h2>
+      </div>
+      <div>
+        <div class="om-text">
+          <p>Balder IT Konsult UF startades av en grupp gymnasieelever i Skellefteå med ett gemensamt intresse för teknik, design och att lösa faktiska problem för faktiska företag. Namnet är hämtat från den nordiska guden Balder, känd för sin klokskap och sitt ljus — precis den känsla vi vill ge våra kunder när tekniken känns krånglig.</p>
+          <p>Som UF-företag driver vi verksamheten på riktigt under läsåret: vi offererar, levererar och fakturerar precis som ett vanligt konsultbolag, fast i mindre skala och med studenttempo.</p>
+        </div>
+        <div class="stat-row">
+          <div>
+            <div class="stat-num">4</div>
+            <div class="stat-label">Personer i teamet</div>
+          </div>
+          <div>
+            <div class="stat-num">2025</div>
+            <div class="stat-label">Grundades</div>
+          </div>
+          <div>
+            <div class="stat-num">3</div>
+            <div class="stat-label">Kompetensområden</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tjanster" id="tjanster">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label">Tjänster</div>
+        <h2>Det vi hjälper er med</h2>
+        <p>Tre områden där vi kan göra störst skillnad för ett litet eller medelstort företag, till en prisnivå som passar en UF-budget.</p>
+      </div>
+
+      <div class="service-row">
+        <div class="service-title">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+          Webbutveckling
+        </div>
+        <div class="service-body">
+          <p>Vi bygger hemsidor och enklare webbutiker som är snabba, tydliga och lätta att uppdatera själv — utan onödiga plugins eller krångliga system.</p>
+          <div class="service-tags">
+            <span class="tag">Hemsidor</span>
+            <span class="tag">Webbutiker</span>
+            <span class="tag">Underhåll</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-title">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+          IT-support &amp; rådgivning
+        </div>
+        <div class="service-body">
+          <p>Krånglande dator, förvirrande molntjänst eller ett system ingen riktigt förstår längre? Vi reder ut det och förklarar på ett språk som inte kräver en IT-avdelning.</p>
+          <div class="service-tags">
+            <span class="tag">Felsökning</span>
+            <span class="tag">Molntjänster</span>
+            <span class="tag">Utbildning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-title">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9M12 19V5M20 19v-7"/></svg>
+          Digitalisering
+        </div>
+        <div class="service-body">
+          <p>Vi kartlägger manuella rutiner — bokningar, fakturor, scheman — och föreslår enkla digitala lösningar som faktiskt sparar tid varje vecka.</p>
+          <div class="service-tags">
+            <span class="tag">Processöversyn</span>
+            <span class="tag">Automatisering</span>
+            <span class="tag">Verktygsval</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-label on-dark">Så jobbar vi</div>
+        <h2 style="color:var(--off-white)">Fyra steg från idé till leverans</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Behovssamtal</h3>
+          <p>Vi träffas, lyssnar och ställer frågor tills vi förstår vad problemet faktiskt är.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Förslag</h3>
+          <p>Ni får ett konkret upplägg med omfattning, tidsplan och pris — inga överraskningar.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Utveckling</h3>
+          <p>Vi bygger, testar och stämmer av löpande så att ingen är osäker på vart det är på väg.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Leverans &amp; support</h3>
+          <p>Ni får en genomgång, dokumentation och möjlighet att höra av er efteråt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kontakt" id="kontakt">
+    <div class="wrap kontakt-grid">
+      <div>
+        <h2>Redo att reda ut er IT?</h2>
+        <p class="kontakt-sub">Skriv till oss så återkommer vi inom ett par dagar. Ett första samtal kostar alltid ingenting.</p>
+        <div class="kontakt-info">
+          <a href="mailto:kontakt@balderit.se">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            kontakt@balderit.se
+          </a>
+          <a href="tel:+46700000000">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2C9.5 21 3 14.5 3 6a2 2 0 012-2z"/></svg>
+            070-000 00 00
+          </a>
+          <a href="#" onclick="return false;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            @balderitkonsult
+          </a>
+        </div>
+      </div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div>
+            <label for="namn">Namn</label>
+            <input id="namn" name="namn" type="text" placeholder="För- och efternamn" required>
+          </div>
+          <div>
+            <label for="epost">E-post</label>
+            <input id="epost" name="epost" type="email" placeholder="dig@företag.se" required>
+          </div>
+        </div>
+        <div>
+          <label for="meddelande">Vad behöver ni hjälp med?</label>
+          <textarea id="meddelande" name="meddelande" placeholder="Berätta kort om er utmaning..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Skicka meddelande</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Balder IT Konsult UF. Drivs av elever, ej ett registrerat aktiebolag.</span>
+    <a href="#top">Till toppen ↑</a>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const form = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formMsg.textContent = 'Tack! Vi hör av oss inom kort.';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
