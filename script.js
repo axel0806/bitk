@@ -21,7 +21,6 @@ navLinks.querySelectorAll('a').forEach(link => {
 const form = document.getElementById('contactForm');
 const formMsg = document.getElementById('formMsg');
 form.addEventListener('submit', (e) => {
-  e.preventDefault();
   formMsg.textContent = 'Tack! Vi hör av oss inom kort.';
   form.reset();
 });
